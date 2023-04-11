@@ -6,7 +6,7 @@ import Gallery from './Gallery.js';
   );
 }
 
-//make changes
+//make changes in this file
 export default function TodoList() {
   return (
     <>
