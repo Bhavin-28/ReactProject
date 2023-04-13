@@ -21,7 +21,7 @@ const product = document.getElementById('root');
   let html = Product1.map((p) => {
     let t = document.createElement('p');
     console.log(t);
-    t.innerHTML = p.id
+    t.innerHTML = p.id  
     // console.log(product);
     // console.log(t);
     product.append(t)
