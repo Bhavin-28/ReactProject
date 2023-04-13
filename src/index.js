@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import {} from './App';
+// import App from './App';
+import ProductData from './Product';
 // import App from './App';
 
 // import Practice from './Practice';
@@ -13,6 +14,7 @@ root.render(
     <>
     {/* <App /> */}
     {/* <Practice/> */}
+    <ProductData/>
     
     </>
     )
