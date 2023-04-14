@@ -1,26 +1,28 @@
-import Gallery from './Gallery.js'; 
+const Product1 = [
+  {
+    id : 1,
+    price : 250,
+    description : 'Electronics'
+  },
+  {
+    id : 2,
+    price : 350,
+    description : 'Mobiles'
+  },
+  {
+    id : 3,
+    price : 450,
+    description : 'kitchens'
+  }
+]
 
- function App(){
-  return(
-    <Gallery />
-  );
-}
-
-//make changes in this file
-export default function TodoList() {
-  return (
-    <>
-    <h1>Hedy Lamarr's Todos</h1>
-      <img 
-        src="https://i.imgur.com/yXOvdOSs.jpg" 
-        alt="Hedy Lamarr" 
-        className="photo"
-      />
-      <ul>
-        <li>Invent new traffic lights</li>
-        <li>Rehearse a movie scene</li>
-        <li>Improve the spectrum technology</li>
-      </ul>
-    </>
-  );
-}
+const product = document.getElementById('root'); 
+// const product = document.querySelector('#root')
+  let html = Product1.map((p) => {
+    let t = document.createElement('p');
+    console.log(t);
+    t.innerHTML = p.id  
+    // console.log(product);
+    // console.log(t);
+    product.append(t)
+  });
