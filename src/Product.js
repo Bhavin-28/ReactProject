@@ -1,35 +1,28 @@
 import React, { useState } from "react";
-const Product1 = [{
-    id : 1,
-    price : 250,
-    description : 'Electronics'
-},
-{
-    id : 2,
-    price : 350,
-    description : 'Mobiles'
-},
-{
-    id : 3,
-    price : 450,
-    description : 'kitchens'
-}]
+import './index.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import ProductBox from "./components/ProductBox";
+const Product1 = []
+let productId = 0;
 
 function ProductCollection(){
-const [inputValue, setInputValue] = useState('');
-const [proPrice,setProPrice] = useState('');
-const [proDesc,setProDesc] = useState('');
-const [products,setProducts] = useState(Product1);
-
+  const [productName, setProductName] = useState('');
+  const [proPrice,setProPrice] = useState('');
+  const [proDesc,setProDesc] = useState('');
+  const [products,setProducts] = useState(Product1);
   let handleClick = (e) =>{
     setProducts([
       ...products,
       {
-        id : inputValue,
+        id : ++productId,
+        name : productName,
         price : proPrice,
         description : proDesc  
       }
     ])
+      setProductName('');
+      setProPrice('');
+      setProDesc('');
     // const proId = inputValue,
     // productPrice = proPrice,
     // productDescription = proDesc;
@@ -47,8 +40,8 @@ const [products,setProducts] = useState(Product1);
   let handleDelete = (e) => {
 
   }
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
+  const handleProductName = (e) => {
+    setProductName(e.target.value);
   }
   const handleProPrice= (e)=>{
     setProPrice(e.target.value)
@@ -59,25 +52,45 @@ const [products,setProducts] = useState(Product1);
   
   return (
 
-    <div className="productAdd">     
-        <h1>Enter Product Info</h1>
-        <div className="productDetail">
-          <input type="text" className="proId" value={inputValue} onChange={handleInputChange} placeholder="Product Id"/>
+    <div className="productAdd container bg-light">     
+        <h1>Enter Product Information</h1>
+        <div className="productDetail col-xs-2">
           
-          <input type="text" className="proPrice" value={proPrice} onChange={handleProPrice} placeholder="Enter Product Pride"/>
+          <div className="input-group mb-3">
+            <div className="input-group-text">
+              <input className="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input" />
+            </div>
+              <input type="text" className="form-control proId" value={productName} onChange={handleProductName} placeholder="Product Name" />
+          </div>
           
-          <input type="text" className="proDesc" placeholder="Enter Product Description" value={proDesc} onChange={handleProDesc}/>
-        </div>  
-          <button type="submit" className="addData" onClick={handleClick} >Add Data</button>
-          <button type="submit" className="addData" onClick={handleDelete} >Delete Product</button>
+          <div className="input-group mb-3">
+            <div className="input-group-text">
+              <input className="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input" />
+            </div>
+              <input type="text" className="form-control proPrice" value={proPrice} onChange={handleProPrice} placeholder="Enter Product Pride" />
+          </div>
 
-      {products.map((data) => (
-        <div key={data.id} id="lrel">
-            <h3>Product id : {data.id}</h3>
-            <h6>Product Price : {data.price}</h6>
-            <h6>Product Description : {data.description}</h6>
-        </div>
-      ))}
+          <div className="input-group mb-3">
+            <div className="input-group-text">
+              <input className="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input" />
+            </div>
+              <input type="text" className="form-control proDesc" placeholder="Enter Product Description" value={proDesc} onChange={handleProDesc} />
+          </div>  
+        
+        </div>  
+          <button type="submit" className="btn btn-outline-primary btn-lm addData me-2" onClick={handleClick} >Add product</button>
+          <button type="submit" className="btn btn-outline-danger btn-lm addData" onClick={handleDelete} >Delete Product</button>
+
+        <div className="productsList d-flex justify-content-around p-4">
+          {products.map((data) => (
+            <div key={data.name} id={`productInformation-${data.id}`} className={`products_list products${data.name} `} >
+                <p>Product Id : {data.id}</p>  
+                <h3>Product Name : {data.name}</h3>
+                <p><b>Product Price : </b> {data.price}</p>
+                <p><b>Product Description : </b>{data.description}</p>
+            </div>
+          ))}
+          </div>  
     </div>
   )
   } 
