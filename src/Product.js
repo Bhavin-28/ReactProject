@@ -12,6 +12,7 @@ function ProductCollection(){
   const [products,setProducts] = useState(Product1);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [selectedProductId, setSelectedProductId] = useState(null);
+  const [proImage, setProImage] = useState(null);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -23,6 +24,7 @@ function ProductCollection(){
             name : productName,
             price : proPrice,
             description : proDesc,
+            image : proImage,
           }; 
         }
         return pro;
@@ -37,13 +39,15 @@ function ProductCollection(){
           name : productName,
           price : proPrice,
           description : proDesc,  
-          
+          image : proImage,
         },
       ]);
+
     }
     setProductName('');
       setProPrice('');
       setProDesc('');
+      setProImage(null);
       // const proId = inputValue,
     // productPrice = proPrice,
     // productDescription = proDesc;
@@ -80,8 +84,13 @@ function ProductCollection(){
     setSelectedProduct(selectedPro);
   }
   const handleImageChange = (e) => {
-
-  }
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setProImage(reader.result);
+    };
+  };
   
   return (
 
@@ -122,7 +131,7 @@ function ProductCollection(){
           <div className="input-group mb-3">
               <input 
                 type="file" 
-                className="form-control attachment" 
+                className="form-control attachment proImage" 
                 placeholder="select Your Attachment" 
                 value='' 
                 onChange={handleImageChange} 
@@ -144,6 +153,9 @@ function ProductCollection(){
                 <h3>Product Name : {data.name}</h3>
                 <p><b>Product Price : </b> {data.price}</p>
                 <p><b>Product Description : </b>{data.description}</p>
+                <div className="product-image">
+                  <img src={data.image} alt="Product Image" />
+                </div>
             </div>
           ))}
         </div>  
